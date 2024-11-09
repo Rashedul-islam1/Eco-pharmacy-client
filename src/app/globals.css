@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Mulish&family=Nunito&family=Nunito+Sans:wght@400;600&family=Poppins:ital,wght@0,400;0,500;1,300;1,400&family=Questrial&family=Raleway&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.heading {
+  @apply text-2xl  md:text-4xl my-5 font-bold tracking-wide capitalize text-secondary;
+}
+.sub-heading {
+  @apply text-primary text-sm uppercase w-fit bg-primary/20 px-3 py-[3px] rounded-full mb-3 max-w-[200px];
+}
+.btn {
+  @apply px-4 py-[0.35rem] rounded  sm:cursor-pointer !uppercase flex-shrink-0;
+}
+
+.btn-primary {
+  @apply bg-primary text-white hover:bg-[#f7751e] shadow-md shadow-primary/60;
+}
+.icon-box {
+  @apply grid flex-shrink-0 rounded-full w-9 h-9 place-items-center hover:bg-slate-200  sm:cursor-pointer;
+}
