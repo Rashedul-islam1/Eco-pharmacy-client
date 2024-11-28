@@ -1,29 +1,10 @@
-"use client";
-import Loader from "@/components/Common/Loader";
-import { useGetAllOrdersQuery } from "@/redux/features/order/orderApi";
-import { useGetAllProductsQuery } from "@/redux/features/product/productApi";
-import { useGetAllUsersQuery } from "@/redux/features/user/userApi";
 import Image from "next/image";
 
-const Dashboard = () => {
-  const { data: users, isLoading: isUserLoading } =
-    useGetAllUsersQuery(undefined);
-  const { data: products } = useGetAllProductsQuery(undefined);
-  const { data: orders } = useGetAllOrdersQuery(undefined);
-
-  if (isUserLoading) {
-    return <Loader />;
-  }
-  const premiumUser = users?.data?.filter(
-    (user: any) => user.isPremium == true
-  ).length;
+const Dashboard = async () => {
   return (
     <div className="h-full  mb-10 ">
-      {/* <IndexDB /> */}
-      {/* <!-- Statistics Cards --> */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
-        {/* Active Users */}
-        <div className="bg-primary shadow-lg rounded-md flex items-center justify-between p-3 text-white font-medium group">
+        <div className="bg-primary shadow-lg rounded-md flex items-center justify-between p-3  text-white font-medium group">
           <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
             <svg
               width="30"
@@ -42,13 +23,11 @@ const Dashboard = () => {
             </svg>
           </div>
           <div className="text-right">
-            <p className="text-2xl">{users?.data?.length}</p>
-            <p>Active Users</p>
+            <p className="text-2xl">1,257</p>
+            <p>Visitors</p>
           </div>
         </div>
-
-        {/* Trips Shared */}
-        <div className="bg-primary shadow-lg rounded-md flex items-center justify-between p-3 text-white font-medium group">
+        <div className="bg-primary shadow-lg rounded-md flex items-center justify-between p-3  text-white font-medium group">
           <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
             <svg
               width="30"
@@ -62,18 +41,16 @@ const Dashboard = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                d="M9 12h6M9 12l2-2M15 12l-2 2M13 5V3a1 1 0 00-1-1H8a1 1 0 00-1 1v2H5a1 1 0 00-1 1v1h12V6a1 1 0 00-1-1h-1V3a1 1 0 00-1-1z"
+                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
               ></path>
             </svg>
           </div>
           <div className="text-right">
-            <p className="text-2xl">{orders?.data?.length}</p>
-            <p>Total Orders</p>
+            <p className="text-2xl">557</p>
+            <p>Orders</p>
           </div>
         </div>
-
-        {/* Tips Posted */}
-        <div className="bg-primary shadow-lg rounded-md flex items-center justify-between p-3 text-white font-medium group">
+        <div className="bg-primary shadow-lg rounded-md flex items-center justify-between p-3  text-white font-medium group">
           <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
             <svg
               width="30"
@@ -92,13 +69,11 @@ const Dashboard = () => {
             </svg>
           </div>
           <div className="text-right">
-            <p className="text-2xl">{products?.data?.length}</p>
-            <p>Total Products</p>
+            <p className="text-2xl">$11,257</p>
+            <p>Sales</p>
           </div>
         </div>
-
-        {/* Premium Subscriptions */}
-        <div className="bg-primary shadow-lg rounded-md flex  justify-between p-3 text-white font-medium group">
+        <div className="bg-primary shadow-lg rounded-md flex items-center justify-between p-3  text-white font-medium group">
           <div className="flex justify-center items-center w-14 h-14 bg-white rounded-full transition-all duration-300 transform group-hover:rotate-12">
             <svg
               width="30"
@@ -117,27 +92,25 @@ const Dashboard = () => {
             </svg>
           </div>
           <div className="text-right">
-            <p className="text-2xl">{premiumUser}</p>
-            <p>Premium Sub</p>
+            <p className="text-2xl">$75,257</p>
+            <p>Balances</p>
           </div>
         </div>
       </div>
 
-      {/* <!-- ./Statistics Cards --> */}
-
       <div className="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4">
         {/* <!-- Social Traffic --> */}
-        <div className="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-gray-50  w-full shadow-lg rounded">
+        <div className="relative flex flex-col min-w-0 mb-4 lg:mb-0 break-words bg-white dark:bg-primary w-full shadow-lg rounded">
           <div className="rounded-t mb-0 px-0 border-0">
             <div className="flex flex-wrap items-center px-4 py-2">
               <div className="relative w-full max-w-full flex-grow flex-1">
-                <h3 className="font-semibold text-base text-gray-900 ">
+                <h3 className="font-semibold text-base text-white ">
                   Social Traffic
                 </h3>
               </div>
               <div className="relative w-full max-w-full flex-grow flex-1 text-right">
                 <button
-                  className="bg-blue-500  text-white active:bg-blue-600   text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  className="bg-blue-500 dark:bg-white text-white active:bg-blue-600 dark:text-primary dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                   type="button"
                 >
                   See all
@@ -148,17 +121,19 @@ const Dashboard = () => {
               <table className="items-center w-full bg-transparent border-collapse">
                 <thead>
                   <tr>
-                    <th className="px-4 bg-gray-100  text-gray-500  align-middle border border-solid border-gray-200  py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                    <th className="px-4 bg-white text-primary align-middle py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                       Referral
                     </th>
-                    <th className="px-4 bg-gray-100  text-gray-500  align-middle border border-solid border-gray-200  py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                    <th className="px-4 bg-white text-primary align-middle py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                       Visitors
                     </th>
-                    <th className="px-4 bg-gray-100  text-gray-500  align-middle border border-solid border-gray-200  py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px"></th>
+                    <th className="px-4 bg-white text-primary align-middle py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                      Progress
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="text-gray-700 ">
+                  <tr className="text-gray-700 dark:text-gray-100">
                     <th className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
                       Facebook
                     </th>
@@ -176,7 +151,7 @@ const Dashboard = () => {
                       </div>
                     </td>
                   </tr>
-                  <tr className="text-gray-700 ">
+                  <tr className="text-gray-700 dark:text-gray-100">
                     <th className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
                       Twitter
                     </th>
@@ -194,7 +169,7 @@ const Dashboard = () => {
                       </div>
                     </td>
                   </tr>
-                  <tr className="text-gray-700 ">
+                  <tr className="text-gray-700 dark:text-gray-100">
                     <th className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
                       Instagram
                     </th>
@@ -212,7 +187,7 @@ const Dashboard = () => {
                       </div>
                     </td>
                   </tr>
-                  <tr className="text-gray-700 ">
+                  <tr className="text-gray-700 dark:text-gray-100">
                     <th className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
                       Google
                     </th>
@@ -230,7 +205,7 @@ const Dashboard = () => {
                       </div>
                     </td>
                   </tr>
-                  <tr className="text-gray-700 ">
+                  <tr className="text-gray-700 dark:text-gray-100">
                     <th className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
                       Linkedin
                     </th>
@@ -256,17 +231,17 @@ const Dashboard = () => {
         {/* <!-- ./Social Traffic -->
 
       <!-- Recent Activities --> */}
-        <div className="relative flex flex-col min-w-0 break-words bg-gray-50  w-full shadow-lg rounded">
+        <div className="relative flex flex-col min-w-0 break-words bg-gray-50 dark:bg-primary w-full shadow-lg rounded">
           <div className="rounded-t mb-0 px-0 border-0">
             <div className="flex flex-wrap items-center px-4 py-2">
               <div className="relative w-full max-w-full flex-grow flex-1">
-                <h3 className="font-semibold text-base text-gray-900 ">
+                <h3 className="font-semibold text-base text-gray-900 dark:text-gray-50">
                   Recent Activities
                 </h3>
               </div>
               <div className="relative w-full max-w-full flex-grow flex-1 text-right">
                 <button
-                  className="bg-blue-500  text-white active:bg-blue-600   text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  className="bg-blue-500 dark:bg-white text-white active:bg-blue-600 dark:text-primary dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                   type="button"
                 >
                   See all
@@ -274,7 +249,7 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="block w-full">
-              <div className="px-4 bg-gray-100  text-gray-500  align-middle border border-solid border-gray-200  py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              <div className="px-4 bg-white text-primary align-middle py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                 Today
               </div>
               <ul className="my-1">
@@ -287,25 +262,22 @@ const Dashboard = () => {
                       <path d="M18 10c-4.4 0-8 3.1-8 7s3.6 7 8 7h.6l5.4 2v-4.4c1.2-1.2 2-2.8 2-4.6 0-3.9-3.6-7-8-7zm4 10.8v2.3L18.9 22H18c-3.3 0-6-2.2-6-5s2.7-5 6-5 6 2.2 6 5c0 2.2-2 3.8-2 3.8z"></path>
                     </svg>
                   </div>
-                  <div className="flex-grow flex items-center border-b border-gray-100  text-sm text-gray-500  py-2">
+                  <div className="flex-grow flex items-center border-b  text-white text-sm py-2">
                     <div className="flex-grow flex justify-between items-center">
                       <div className="self-center">
-                        <a
-                          className="font-medium text-primary hover:text-gray-900  "
-                          href="#0"
-                        >
+                        <a className="font-medium text-white" href="#">
                           Nick Mark
                         </a>{" "}
                         mentioned{" "}
-                        <a className="font-medium text-primary  " href="#0">
+                        <a className="font-medium text-white " href="#">
                           Sara Smith
                         </a>{" "}
                         in a new post
                       </div>
                       <div className="flex-shrink-0 ml-2">
                         <a
-                          className="flex items-center font-medium text-blue-500 hover:text-blue-600  "
-                          href="#0"
+                          className="flex items-center font-medium test-white"
+                          href="#"
                         >
                           View
                           <span>
@@ -337,25 +309,22 @@ const Dashboard = () => {
                       <path d="M25 24H11a1 1 0 01-1-1v-5h2v4h12v-4h2v5a1 1 0 01-1 1zM14 13h8v2h-8z"></path>
                     </svg>
                   </div>
-                  <div className="flex-grow flex items-center border-gray-100 text-sm text-gray-500  py-2">
+                  <div className="flex-grow flex items-center text-sm text-white py-2">
                     <div className="flex-grow flex justify-between items-center">
                       <div className="self-center">
                         The post{" "}
-                        <a className="font-medium text-primary  " href="#0">
+                        <a className="font-medium text-white " href="#">
                           Post Name
                         </a>{" "}
                         was removed by{" "}
-                        <a
-                          className="font-medium text-primary hover:text-gray-900  "
-                          href="#0"
-                        >
+                        <a className="font-medium text- " href="#">
                           Nick Mark
                         </a>
                       </div>
                       <div className="flex-shrink-0 ml-2">
                         <a
-                          className="flex items-center font-medium text-blue-500 hover:text-blue-600  "
-                          href="#0"
+                          className="flex items-center font-medium test-white"
+                          href="#"
                         >
                           View
                           <span>
@@ -379,7 +348,7 @@ const Dashboard = () => {
                   </div>
                 </li>
               </ul>
-              <div className="px-4 bg-gray-100  text-gray-500  align-middle border border-solid border-gray-200  py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              <div className="px-4 bg-white text-primary align-middle py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                 Yesterday
               </div>
               <ul className="my-1">
@@ -392,24 +361,21 @@ const Dashboard = () => {
                       <path d="M23 11v2.085c-2.841.401-4.41 2.462-5.8 4.315-1.449 1.932-2.7 3.6-5.2 3.6h-1v2h1c3.5 0 5.253-2.338 6.8-4.4 1.449-1.932 2.7-3.6 5.2-3.6h3l-4-4zM15.406 16.455c.066-.087.125-.162.194-.254.314-.419.656-.872 1.033-1.33C15.475 13.802 14.038 13 12 13h-1v2h1c1.471 0 2.505.586 3.406 1.455zM24 21c-1.471 0-2.505-.586-3.406-1.455-.066.087-.125.162-.194.254-.316.422-.656.873-1.028 1.328.959.878 2.108 1.573 3.628 1.788V25l4-4h-3z"></path>
                     </svg>
                   </div>
-                  <div className="flex-grow flex items-center border-gray-100 text-sm text-gray-500  py-2">
+                  <div className="flex-grow flex items-center  text-sm text-white py-2">
                     <div className="flex-grow flex justify-between items-center">
                       <div className="self-center">
-                        <a
-                          className="font-medium text-primary hover:text-gray-900  "
-                          href="#0"
-                        >
+                        <a className="font-medium text-white " href="#">
                           240+
                         </a>{" "}
                         users have subscribed to{" "}
-                        <a className="font-medium text-primary  " href="#0">
+                        <a className="font-medium text-white " href="#">
                           Newsletter #1
                         </a>
                       </div>
                       <div className="flex-shrink-0 ml-2">
                         <a
-                          className="flex items-center font-medium text-blue-500 hover:text-blue-600  "
-                          href="#0"
+                          className="flex items-center font-medium text-white"
+                          href="#"
                         >
                           View
                           <span>
@@ -444,21 +410,21 @@ const Dashboard = () => {
           <div className="w-full overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b  bg-gray-50  ">
+                <tr className="text-xs font-semibold tracking-wide text-left text-primary uppercase bg-white">
                   <th className="px-4 py-3">Client</th>
                   <th className="px-4 py-3">Amount</th>
                   <th className="px-4 py-3">Status</th>
                   <th className="px-4 py-3">Date</th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y  ">
-                <tr className="bg-gray-50  hover:bg-gray-100  text-gray-700 ">
+              <tbody className=" divide-y ">
+                <tr className="bg-primary text-white">
                   <td className="px-4 py-3">
                     <div className="flex items-center text-sm">
                       <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
                         <Image
-                          width={1200}
-                          height={200}
+                          width={1230}
+                          height={100}
                           className="object-cover w-full h-full rounded-full"
                           src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
                           alt=""
@@ -471,26 +437,26 @@ const Dashboard = () => {
                       </div>
                       <div>
                         <p className="font-semibold">Hans Burger</p>
-                        <p className="text-xs text-gray-300 ">10x Developer</p>
+                        <p className="text-xs text-white">10x Developer</p>
                       </div>
                     </div>
                   </td>
                   <td className="px-4 py-3 text-sm">$855.85</td>
                   <td className="px-4 py-3 text-xs">
-                    <span className="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full  ">
+                    <span className="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
                       {" "}
                       Approved{" "}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-sm">15-01-2021</td>
+                  <td className="px-4 py-3 text-sm">15-05-2024</td>
                 </tr>
-                <tr className="bg-gray-50  hover:bg-gray-100  text-gray-700 ">
+                <tr className="bg-primary text-white">
                   <td className="px-4 py-3">
                     <div className="flex items-center text-sm">
                       <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
                         <Image
-                          width={1200}
-                          height={200}
+                          width={1230}
+                          height={100}
                           className="object-cover w-full h-full rounded-full"
                           src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;facepad=3&amp;fit=facearea&amp;s=707b9c33066bf8808c934c8ab394dff6"
                           alt=""
@@ -503,7 +469,7 @@ const Dashboard = () => {
                       </div>
                       <div>
                         <p className="font-semibold">Jolina Angelie</p>
-                        <p className="text-xs text-gray-300 ">Unemployed</p>
+                        <p className="text-xs text-white">Unemployed</p>
                       </div>
                     </div>
                   </td>
@@ -514,15 +480,15 @@ const Dashboard = () => {
                       Pending{" "}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-sm">23-03-2021</td>
+                  <td className="px-4 py-3 text-sm">23-05-2024</td>
                 </tr>
-                <tr className="bg-gray-50  hover:bg-gray-100  text-gray-700 ">
+                <tr className="bg-primary text-white">
                   <td className="px-4 py-3">
                     <div className="flex items-center text-sm">
                       <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
                         <Image
-                          width={1200}
-                          height={200}
+                          width={1230}
+                          height={100}
                           className="object-cover w-full h-full rounded-full"
                           src="https://images.unsplash.com/photo-1502720705749-871143f0e671?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;s=b8377ca9f985d80264279f277f3a67f5"
                           alt=""
@@ -535,26 +501,26 @@ const Dashboard = () => {
                       </div>
                       <div>
                         <p className="font-semibold">Dave Li</p>
-                        <p className="text-xs text-gray-300 ">Influencer</p>
+                        <p className="text-xs text-white">Influencer</p>
                       </div>
                     </div>
                   </td>
                   <td className="px-4 py-3 text-sm">$775.45</td>
                   <td className="px-4 py-3 text-xs">
-                    <span className="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full  ">
+                    <span className="px-2 py-1 font-semibold leading-tight text-gray-700 bg-white rounded-full dark:text-gray-100 dark:bg-gray-700">
                       {" "}
                       Expired{" "}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-sm">09-02-2021</td>
+                  <td className="px-4 py-3 text-sm">09-05-2024</td>
                 </tr>
-                <tr className="bg-gray-50  hover:bg-gray-100  text-gray-700 ">
+                <tr className="bg-primary text-white">
                   <td className="px-4 py-3">
                     <div className="flex items-center text-sm">
                       <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
                         <Image
-                          width={1200}
-                          height={200}
+                          width={1230}
+                          height={100}
                           className="object-cover w-full h-full rounded-full"
                           src="https://images.unsplash.com/photo-1551006917-3b4c078c47c9?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
                           alt=""
@@ -567,26 +533,26 @@ const Dashboard = () => {
                       </div>
                       <div>
                         <p className="font-semibold">Rulia Joberts</p>
-                        <p className="text-xs text-gray-300 ">Actress</p>
+                        <p className="text-xs text-white">Actress</p>
                       </div>
                     </div>
                   </td>
                   <td className="px-4 py-3 text-sm">$1276.75</td>
                   <td className="px-4 py-3 text-xs">
-                    <span className="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full  ">
+                    <span className="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
                       {" "}
                       Approved{" "}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-sm">17-04-2021</td>
+                  <td className="px-4 py-3 text-sm">17-05-2024</td>
                 </tr>
-                <tr className="bg-gray-50  hover:bg-gray-100  text-gray-700 ">
+                <tr className="bg-primary text-white">
                   <td className="px-4 py-3">
                     <div className="flex items-center text-sm">
                       <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
                         <Image
-                          width={1200}
-                          height={200}
+                          width={1230}
+                          height={100}
                           className="object-cover w-full h-full rounded-full"
                           src="https://images.unsplash.com/photo-1566411520896-01e7ca4726af?ixlib=rb-1.2.1&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=200&amp;fit=max&amp;ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
                           alt=""
@@ -599,7 +565,7 @@ const Dashboard = () => {
                       </div>
                       <div>
                         <p className="font-semibold">Hitney Wouston</p>
-                        <p className="text-xs text-gray-300 ">Singer</p>
+                        <p className="text-xs text-white">Singer</p>
                       </div>
                     </div>
                   </td>
@@ -610,12 +576,12 @@ const Dashboard = () => {
                       Denied{" "}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-sm">11-01-2021</td>
+                  <td className="px-4 py-3 text-sm">11-05-2024</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div className="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t  bg-gray-50 sm:grid-cols-9  ">
+          <div className="grid px-4 py-3 text-xs font-semibold tracking-wide text-white uppercase border-t  bg-gray-50 sm:grid-cols-9  dark:bg-primary">
             <span className="flex items-center col-span-3">
               {" "}
               Showing 21-30 of 100{" "}
@@ -654,7 +620,7 @@ const Dashboard = () => {
                     </button>
                   </li>
                   <li>
-                    <button className="px-3 py-1 text-white  transition-colors duration-150 bg-blue-600  border border-r-0 border-blue-600 dark:border-gray-100 rounded-md focus:outline-none focus:shadow-outline-purple">
+                    <button className="px-3 py-1 text-white dark:text-primary transition-colors duration-150 bg-blue-600 dark:bg-white border border-r-0 border-blue-600 dark:border-gray-100 rounded-md focus:outline-none focus:shadow-outline-purple">
                       3
                     </button>
                   </li>

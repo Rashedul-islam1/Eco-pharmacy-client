@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Banner = () => {
   return (
     <div
@@ -22,9 +24,11 @@ const Banner = () => {
           various different brand names.
         </p>
 
-        <button className="rounded-full px-3.5 py-1.5 text-base  bg-primary hover:bg-primary/90 text-white duration-300">
-          Learn More
-        </button>
+        <a href="/products">
+          <button className="rounded-full px-3.5 py-1.5 text-base  bg-primary hover:bg-primary/90 text-white duration-300">
+            Get Started
+          </button>
+        </a>
       </div>
     </div>
   );

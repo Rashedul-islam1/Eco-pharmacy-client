@@ -27,6 +27,7 @@ const ManageProducts = () => {
     isLoading,
     isError,
   } = useGetAllProductsQuery(undefined);
+
   const { role }: any = useSelector((state: RootState) =>
     selectCurrentUser(state)
   );
